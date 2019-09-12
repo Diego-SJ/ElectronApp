@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <script>
+        if (typeof module === "object") {
+            window.module = module; 
+            module = undefined;
+        }
+    </script>
+    <script src="../assets/js/jquery.js"></script>
+    <script src="../assets/js/jquery.canvasjs.min.js"></script>
+    <script>if (window.module) module = window.module;</script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark-c">
+            <div class="collapse navbar-collapse nav-li" id="navbarColor01">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        
+                    </li>
+                    <li class="nav-item ml-2">
+                        <a id="btnGraphic" class="nav-link btn bg-green" href="#">Graphic</span></a>
+                    </li>
+                    <li class="nav-item ml-2">
+                        <a id="btnAboutPm" class="nav-link btn bg-orange" href="#">About PM</span></a>
+                    </li>
+                    <li class="nav-item ml-2">
+                        <a id="btnAboutApp" class="nav-link btn bg-blue" href="#">About app</span></a>
+                    </li>
+                </ul>
+            </div>
+            <a class="navbar-brand text-dark" href="#">IHC - PM SIGNAL APP</a>
+            <a id="btnExitApp" class="nav-link btn btn-danger btn-ex text-white" href="#"><b>X</b></span></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
+
+        <div id="uiGraphic" class="container-fliud">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-4 mt-3">
+                        <button id="resetCharAndForms" class="btn bg-yellow btn-md text-white shadow-sm" type="button"> Limpiar datos</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 ml-3 mr-3">
+                        <div class="row">
+                            <div class="card shadow bg-green-c mt-3 wm">
+                                <div class="card-body">
+                                    <h5 class="text-white">Frec. señal portadora</h5>
+                                    <form action="" class="form">
+                                        <div class="form-group">
+                                            <input id="a_am" type="text" class="form-control text-green input-c" placeholder="Amplitud" value="0">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="range" min="20000" max="1000000" value="0" class="form-control-range" id="range_portadora">
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-6 text-white">20k</div>
+                                                <div class="col-md-6 text-left text-white">1M</div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="card shadow bg-blue-c mt-3 wm">
+                                <div class="card-body">
+                                    <h5 class="text-white">Frec. señal moduladora</h5>
+                                    <div class="form-group">
+                                        <input id="f_am" type="number" class="form-control text-blue input-c" placeholder="Frecuencia" value="0">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="range" min="1000" max="10000" value="0" class="form-control-range" id="range_moduladora">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-6 text-white">1k</div>
+                                            <div class="col-md-6 text-left text-white">10k</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="card shadow bg-orange-c mt-3 mb-3 wm">
+                                <div class="card-body">
+                                    <h5 class="text-white">Periodos</h5>
+                                    <div class="form-group">
+                                        <input id="p_pm" type="number" class="form-control text-orange input-c" placeholder="Periodos" value="0">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="range" min="-31416" max="31416" value="0" class="form-control-range" id="range_modulada">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-6 text-white">- PI</div>
+                                            <div class="col-md-6 text-left text-white">PI</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="col-md-8 mt-3 mb-3 wm ml-3 mr-3">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div id="chartPortadora" style="height: 200px; width: 100%;" class="shadow-sm text-center signal">
+                                    <h5 class="pading-box text-green">Señal portadora</h5>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="chartModuladora" style="height: 200px; width: 100%;" class="shadow-sm text-center signal">
+                                    <h5 class="pading-box text-blue">Señal moduladora</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 mt-3">
+                                <div id="chartContainer" style="height: 280px; width: 100%;" class="shadow-sm text-center signal">
+                                    <h5 class="pading-box text-orange">Señal modulada</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="uiAboutPm" class="about-pm">
+            <div class="container-fluid">
+                <div class="container-about-pm shadow-lg">
+                    <h3>PM</h3>
+                    <p>
+                        Es una modulación que se caracteriza porque 
+                        la fase de la onda portadora varía en forma directamente proporcional de acuerdo con 
+                        la señal moduladora. La modulación de fase no suele ser muy utilizada porque se 
+                        requieren equipos de recepción más complejos que los de frecuencia modulada.
+                    </p>
+                    <h3>Instructions</h3>
+                    <p>
+                        Modifica los valores para ver el comportamiento de la señal.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div id="uiAboutApp" class="about-app">
+            <div class="container-fluid">
+                <div class="container-about shadow-lg">
+                    <h3>PM SIGNAL PLOTTER</h3>
+                    <h4>Open source application for non-commercial use.</h4>
+                    <p>
+                        Developed by: 
+                        <br> Juan Diego Salas Jimenez
+                        <br> Johan Contreras Cortez
+                    </p>
+                    <p>v1.0.2    IHC - TICS, 2019.</p>
+                </div>
+            </div>
+        </div>
+    <script>require('../assets/js/renderer')</script>
+    <script>require('../assets/js/plotter')</script>
+    <script>
+    </script>
+</body>
+</html>
